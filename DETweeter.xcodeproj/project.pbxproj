@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		60C6B2EB1471CBEE0090278C /* OAuth+DEUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6B2EA1471CBEE0090278C /* OAuth+DEUserDefaults.m */; };
-		60C6B2EE1471D47D0090278C /* OAuth+DEExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6B2ED1471D47D0090278C /* OAuth+DEExtensions.m */; };
 		6925A81114590EB400011DA0 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6925A7D714590EB400011DA0 /* NSObject+SBJSON.m */; };
 		6925A81214590EB400011DA0 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6925A7D914590EB400011DA0 /* NSString+SBJSON.m */; };
 		6925A81314590EB400011DA0 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6925A7DB14590EB400011DA0 /* SBJSON.m */; };
@@ -32,7 +30,6 @@
 		695D657E146609430002D720 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 695D657D146609430002D720 /* Default@2x.png */; };
 		697FE2CF14903C750045B8C7 /* UIDevice+DETweetComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 697FE2CE14903C750045B8C7 /* UIDevice+DETweetComposeViewController.m */; };
 		697FE2DA149040AF0045B8C7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 697FE2D9149040AF0045B8C7 /* Accounts.framework */; };
-		699A29BB1459B3960046B260 /* DETweetPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 699A29BA1459B3960046B260 /* DETweetPoster.m */; };
 		69DF263016246B7400AF4614 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69DF262F16246B7400AF4614 /* Default-568h@2x.png */; };
 		69E70E8A1484BAD5004A66CA /* DEHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E70E891484BAD5004A66CA /* DEHTTPRequest.m */; };
 		69F126411489A81C00343C3D /* YawkeyBusinessDog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69F126401489A81C00343C3D /* YawkeyBusinessDog.jpg */; };
@@ -84,10 +81,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		60C6B2E81471CBD90090278C /* OAuth+DEUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OAuth+DEUserDefaults.h"; path = "DETweetComposeViewController/OAuth+DEUserDefaults.h"; sourceTree = SOURCE_ROOT; };
-		60C6B2EA1471CBEE0090278C /* OAuth+DEUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "OAuth+DEUserDefaults.m"; path = "DETweetComposeViewController/OAuth+DEUserDefaults.m"; sourceTree = SOURCE_ROOT; };
-		60C6B2EC1471D4700090278C /* OAuth+DEExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OAuth+DEExtensions.h"; path = "DETweetComposeViewController/OAuth+DEExtensions.h"; sourceTree = SOURCE_ROOT; };
-		60C6B2ED1471D47D0090278C /* OAuth+DEExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "OAuth+DEExtensions.m"; path = "DETweetComposeViewController/OAuth+DEExtensions.m"; sourceTree = SOURCE_ROOT; };
 		6925A7D514590EB400011DA0 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		6925A7D614590EB400011DA0 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		6925A7D714590EB400011DA0 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -131,8 +124,6 @@
 		697FE2CE14903C750045B8C7 /* UIDevice+DETweetComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+DETweetComposeViewController.m"; path = "DETweetComposeViewController/UIDevice+DETweetComposeViewController.m"; sourceTree = SOURCE_ROOT; };
 		697FE2D9149040AF0045B8C7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		6980DB8714738CF4002282CB /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		699A29B91459B3960046B260 /* DETweetPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DETweetPoster.h; path = ../DETweetComposeViewController/DETweetPoster.h; sourceTree = "<group>"; };
-		699A29BA1459B3960046B260 /* DETweetPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DETweetPoster.m; path = ../DETweetComposeViewController/DETweetPoster.m; sourceTree = "<group>"; };
 		69DF262F16246B7400AF4614 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		69E70E881484BAD5004A66CA /* DEHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEHTTPRequest.h; sourceTree = "<group>"; };
 		69E70E891484BAD5004A66CA /* DEHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEHTTPRequest.m; sourceTree = "<group>"; };
@@ -402,12 +393,6 @@
 				B69C605914894F4D00A18C1B /* DERuledView.m */,
 				B68527BE148F1DB900B18D5D /* DEEmbossedLabel.h */,
 				B68527BF148F1DB900B18D5D /* DEEmbossedLabel.m */,
-				699A29B91459B3960046B260 /* DETweetPoster.h */,
-				699A29BA1459B3960046B260 /* DETweetPoster.m */,
-				60C6B2EC1471D4700090278C /* OAuth+DEExtensions.h */,
-				60C6B2ED1471D47D0090278C /* OAuth+DEExtensions.m */,
-				60C6B2E81471CBD90090278C /* OAuth+DEUserDefaults.h */,
-				60C6B2EA1471CBEE0090278C /* OAuth+DEUserDefaults.m */,
 				697FE2CD14903C750045B8C7 /* UIDevice+DETweetComposeViewController.h */,
 				697FE2CE14903C750045B8C7 /* UIDevice+DETweetComposeViewController.m */,
 				B6B6CCF214586015005B93A1 /* Images */,
@@ -559,10 +544,7 @@
 				6925A82214590EB400011DA0 /* NSString+URLEncoding.m in Sources */,
 				6925A82414590EB400011DA0 /* OAuth.m in Sources */,
 				6925A82714590EB400011DA0 /* TwitterDialog.m in Sources */,
-				699A29BB1459B3960046B260 /* DETweetPoster.m in Sources */,
 				B6FD55AD1463A6E100739469 /* DETweetTextView.m in Sources */,
-				60C6B2EB1471CBEE0090278C /* OAuth+DEUserDefaults.m in Sources */,
-				60C6B2EE1471D47D0090278C /* OAuth+DEExtensions.m in Sources */,
 				69E70E8A1484BAD5004A66CA /* DEHTTPRequest.m in Sources */,
 				B69AB9B414869A5C00652DDF /* DETweetGradientView.m in Sources */,
 				B69C605A14894F4D00A18C1B /* DERuledView.m in Sources */,
@@ -621,6 +603,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -645,6 +628,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Double Encore, Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

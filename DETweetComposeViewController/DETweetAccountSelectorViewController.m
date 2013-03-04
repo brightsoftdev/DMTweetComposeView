@@ -17,7 +17,6 @@
 //
 
 #import "DETweetAccountSelectorViewController.h"
-#import "DETweetPoster.h"
 
 
 #define DETweetAccountSelectorSelectorSelectedAccountTextColor [UIColor colorWithRed:0.20f green:0.31f blue:0.52f alpha:1.0f]
@@ -65,8 +64,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.accounts = [DETweetPoster accounts];
 }
 
 

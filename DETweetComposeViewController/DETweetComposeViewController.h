@@ -16,16 +16,18 @@
 //  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "DETweetPoster.h"
 #import "DETweetAccountSelectorViewController.h"
 #import "TwitterDialog.h"
 
 @class DETweetSheetCardView;
 @class DETweetTextView;
 
-@interface DETweetComposeViewController : UIViewController <UITextViewDelegate, UIAlertViewDelegate,
-UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, DETweetAccountSelectorViewControllerDelegate,
-DETweetPosterDelegate, TwitterDialogDelegate, TwitterLoginDialogDelegate>
+@interface DETweetComposeViewController : UIViewController <
+    UITextViewDelegate,
+    UIAlertViewDelegate,
+    UIPopoverControllerDelegate,
+    DETweetAccountSelectorViewControllerDelegate
+>
 
 @property (retain, nonatomic) IBOutlet DETweetSheetCardView *cardView;
 @property (retain, nonatomic) IBOutlet UILabel *titleLabel;
@@ -44,8 +46,6 @@ DETweetPosterDelegate, TwitterDialogDelegate, TwitterLoginDialogDelegate>
 @property (retain, nonatomic) IBOutlet UILabel *characterCountLabel;
 
     // Public
-+ (void)displayNoTwitterAccountsAlert;
-
 - (IBAction)send;
 - (IBAction)cancel;
 
@@ -57,14 +57,6 @@ typedef enum DETweetComposeViewControllerResult DETweetComposeViewControllerResu
 
     // Completion handler for DETweetComposeViewController
 typedef void (^DETweetComposeViewControllerCompletionHandler)(DETweetComposeViewControllerResult result); 
-
-    // Returns YES if the user has granted our app access to the Twitter accounts.
-+ (BOOL)canAccessTwitterAccounts;
-
-    // Returns YES if Twitter is accessible and at least one account has been setup in
-    // iOS5 Twitter settings.  Will also return YES if DE Twitter OAuth credentials have
-    // been set.
-+ (BOOL)canSendTweet;
 
     // Sets the initial text to be tweeted. Returns NO if the specified text will
     // not fit within the character space currently available, or if the sheet
