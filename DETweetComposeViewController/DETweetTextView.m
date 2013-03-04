@@ -23,10 +23,10 @@
 
 @interface DETweetTextView ()
 
-@property (nonatomic, retain) DERuledView *ruledView;
-@property (nonatomic, retain) UIButton *fromButton;
-@property (nonatomic, retain) UIButton *accountButton;
-@property (nonatomic, retain) UIImageView *accountLine;
+@property (nonatomic, strong) DERuledView *ruledView;
+@property (nonatomic, strong) UIButton *fromButton;
+@property (nonatomic, strong) UIButton *accountButton;
+@property (nonatomic, strong) UIImageView *accountLine;
 
 - (void)textViewInit;
 - (CGRect)ruledViewFrame;
@@ -87,15 +87,14 @@
 - (void)dealloc
 {
         // Public
-    [_accountName release], _accountName = nil;
+    _accountName = nil;
     
         // Private
-    [_ruledView release], _ruledView = nil;
-    [_fromButton release], _fromButton = nil;
-    [_accountButton release], _accountButton = nil;
-    [_accountLine release], _accountLine = nil;
+    _ruledView = nil;
+    _fromButton = nil;
+    _accountButton = nil;
+    _accountLine = nil;
     
-    [super dealloc];
 }
 
 
@@ -181,7 +180,7 @@
             self.accountButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
             [self addSubview:self.accountButton];
             
-            self.accountLine = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DETweetCardAccountLine"]] autorelease];
+            self.accountLine = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DETweetCardAccountLine"]];
             [self addSubview:self.accountLine];
         }
         [self.accountButton setTitle:self.accountName forState:UIControlStateNormal];
@@ -213,7 +212,6 @@
 - (void)setAccountName:(NSString *)name
 {
     if ([_accountName isEqualToString:name] == NO) {
-        [_accountName release];
         _accountName = [name copy];
         [self updateAccountsView];
     }

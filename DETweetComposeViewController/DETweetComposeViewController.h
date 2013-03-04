@@ -28,21 +28,21 @@
     DETweetAccountSelectorViewControllerDelegate
 >
 
-@property (retain, nonatomic) IBOutlet DETweetSheetCardView *cardView;
-@property (retain, nonatomic) IBOutlet UILabel *titleLabel;
-@property (retain, nonatomic) IBOutlet UIButton *cancelButton;
-@property (retain, nonatomic) IBOutlet UIButton *sendButton;
-@property (retain, nonatomic) IBOutlet UIView *cardHeaderLineView;
-@property (retain, nonatomic) IBOutlet DETweetTextView *textView;
-@property (retain, nonatomic) IBOutlet UIView *textViewContainer;
-@property (retain, nonatomic) IBOutlet UIImageView *paperClipView;
-@property (retain, nonatomic) IBOutlet UIImageView *attachment1FrameView;
-@property (retain, nonatomic) IBOutlet UIImageView *attachment2FrameView;
-@property (retain, nonatomic) IBOutlet UIImageView *attachment3FrameView;
-@property (retain, nonatomic) IBOutlet UIImageView *attachment1ImageView;
-@property (retain, nonatomic) IBOutlet UIImageView *attachment2ImageView;
-@property (retain, nonatomic) IBOutlet UIImageView *attachment3ImageView;
-@property (retain, nonatomic) IBOutlet UILabel *characterCountLabel;
+@property (strong, nonatomic) IBOutlet DETweetSheetCardView *cardView;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIButton *cancelButton;
+@property (strong, nonatomic) IBOutlet UIButton *sendButton;
+@property (strong, nonatomic) IBOutlet UIView *cardHeaderLineView;
+@property (strong, nonatomic) IBOutlet DETweetTextView *textView;
+@property (strong, nonatomic) IBOutlet UIView *textViewContainer;
+@property (strong, nonatomic) IBOutlet UIImageView *paperClipView;
+@property (strong, nonatomic) IBOutlet UIImageView *attachment1FrameView;
+@property (strong, nonatomic) IBOutlet UIImageView *attachment2FrameView;
+@property (strong, nonatomic) IBOutlet UIImageView *attachment3FrameView;
+@property (strong, nonatomic) IBOutlet UIImageView *attachment1ImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *attachment2ImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *attachment3ImageView;
+@property (strong, nonatomic) IBOutlet UILabel *characterCountLabel;
 
     // Public
 - (IBAction)send;

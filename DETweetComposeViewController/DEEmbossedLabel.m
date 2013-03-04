@@ -24,7 +24,7 @@
 
 @interface DEEmbossedLabel ()
 
-@property (nonatomic, retain) NSAttributedString *attString;
+@property (nonatomic, strong) NSAttributedString *attString;
 
 - (void)embossedLabelInit;
 - (void)drawTextInContext:(CGContextRef)context;

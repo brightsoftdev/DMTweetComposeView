@@ -13,7 +13,7 @@
 
 @interface DEViewController ()
 
-@property (nonatomic, retain) NSArray *tweets;
+@property (nonatomic, strong) NSArray *tweets;
 
 - (void)updateFramesForOrientation:(UIInterfaceOrientation)interfaceOrientation;
 - (void)addTweetContent:(id)tcvc;
@@ -38,15 +38,14 @@
 - (void)dealloc
 {
         // IBOutlets
-    [_deTweetButton release], _deTweetButton = nil;
-    [_twTweetButton release], _twTweetButton = nil;
-    [_backgroundView release], _backgroundView = nil;
-    [_buttonView release], _buttonView = nil;
+    _deTweetButton = nil;
+    _twTweetButton = nil;
+    _backgroundView = nil;
+    _buttonView = nil;
     
         // Private
-    [_tweets release], _tweets = nil;
+    _tweets = nil;
 
-    [super dealloc];
 }
 
 
@@ -146,7 +145,7 @@
         [self dismissModalViewControllerAnimated:YES];
     };
 
-    DETweetComposeViewController *tcvc = [[[DETweetComposeViewController alloc] init] autorelease];
+    DETweetComposeViewController *tcvc = [[DETweetComposeViewController alloc] init];
     self.modalPresentationStyle = UIModalPresentationCurrentContext;
     [self addTweetContent:tcvc];
     tcvc.completionHandler = completionHandler;

@@ -26,17 +26,17 @@
 
 @interface DETweetComposeViewController ()
 @property (nonatomic, copy) NSString *text;
-@property (nonatomic, retain) NSMutableArray *images;
-@property (nonatomic, retain) NSMutableArray *urls;
-@property (nonatomic, retain) NSArray *attachmentFrameViews;
-@property (nonatomic, retain) NSArray *attachmentImageViews;
+@property (nonatomic, strong) NSMutableArray *images;
+@property (nonatomic, strong) NSMutableArray *urls;
+@property (nonatomic, strong) NSArray *attachmentFrameViews;
+@property (nonatomic, strong) NSArray *attachmentImageViews;
 @property (nonatomic) UIStatusBarStyle previousStatusBarStyle;
-@property (nonatomic, assign) UIViewController *fromViewController;
-@property (nonatomic, retain) UIImageView *backgroundImageView;
-@property (nonatomic, retain) DETweetGradientView *gradientView;
-@property (nonatomic, retain) UIPickerView *accountPickerView;
-@property (nonatomic, retain) UIPopoverController *accountPickerPopoverController;
-@property (nonatomic, retain) id twitterAccount;  // iOS 5 use only.
+@property (nonatomic, unsafe_unretained) UIViewController *fromViewController;
+@property (nonatomic, strong) UIImageView *backgroundImageView;
+@property (nonatomic, strong) DETweetGradientView *gradientView;
+@property (nonatomic, strong) UIPickerView *accountPickerView;
+@property (nonatomic, strong) UIPopoverController *accountPickerPopoverController;
+@property (nonatomic, strong) id twitterAccount;  // iOS 5 use only.
 @end
 
 
@@ -95,9 +95,9 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
             break;
     }
     
-    UIImage *outputImage = [[[UIImage alloc] initWithCGImage: image.CGImage
+    UIImage *outputImage = [[UIImage alloc] initWithCGImage: image.CGImage
                                                       scale: 1.0
-                                                orientation: imageOrientation] autorelease];
+                                                orientation: imageOrientation];
     return outputImage;
 }
 
@@ -134,37 +134,36 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
 - (void)dealloc
 {
         // IBOutlets
-    [_cardView release], _cardView = nil;
-    [_titleLabel release], _titleLabel = nil;
-    [_cancelButton release], _cancelButton = nil;
-    [_sendButton release], _sendButton = nil;
-    [_cardHeaderLineView release], _cardHeaderLineView = nil;
-    [_textView release], _textView = nil;
-    [_textViewContainer release], _textViewContainer = nil;
-    [_paperClipView release], _paperClipView = nil;
-    [_attachment1FrameView release], _attachment1FrameView = nil;
-    [_attachment2FrameView release], _attachment2FrameView = nil;
-    [_attachment3FrameView release], _attachment3FrameView = nil;
-    [_attachment1ImageView release], _attachment1ImageView = nil;
-    [_attachment2ImageView release], _attachment2ImageView = nil;
-    [_attachment3ImageView release], _attachment3ImageView = nil;
-    [_characterCountLabel release], _characterCountLabel = nil;
+    _cardView = nil;
+    _titleLabel = nil;
+    _cancelButton = nil;
+    _sendButton = nil;
+    _cardHeaderLineView = nil;
+    _textView = nil;
+    _textViewContainer = nil;
+    _paperClipView = nil;
+    _attachment1FrameView = nil;
+    _attachment2FrameView = nil;
+    _attachment3FrameView = nil;
+    _attachment1ImageView = nil;
+    _attachment2ImageView = nil;
+    _attachment3ImageView = nil;
+    _characterCountLabel = nil;
     
         // Public
-    [_completionHandler release], _completionHandler = nil;
+    _completionHandler = nil;
     
         // Private
-    [_text release], _text = nil;
-    [_images release], _images = nil;
-    [_urls release], _urls = nil;
-    [_attachmentFrameViews release], _attachmentFrameViews = nil;
-    [_attachmentImageViews release], _attachmentImageViews = nil;
-    [_backgroundImageView release], _backgroundImageView = nil;
-    [_gradientView release], _gradientView = nil;
-    [_accountPickerView release], _accountPickerView = nil;
-    [_accountPickerPopoverController release], _accountPickerPopoverController = nil;
-    [_twitterAccount release], _twitterAccount = nil;
-    [super dealloc];
+    _text = nil;
+    _images = nil;
+    _urls = nil;
+    _attachmentFrameViews = nil;
+    _attachmentImageViews = nil;
+    _backgroundImageView = nil;
+    _gradientView = nil;
+    _accountPickerView = nil;
+    _accountPickerPopoverController = nil;
+    _twitterAccount = nil;
 }
 
 
@@ -228,10 +227,10 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
         // If they don't match, just display the gray background.
     if (self.interfaceOrientation == self.fromViewController.interfaceOrientation) {
         UIImage *backgroundImage = [self captureScreen];
-        self.backgroundImageView = [[[UIImageView alloc] initWithImage:backgroundImage] autorelease];
+        self.backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
     }
     else {
-        self.backgroundImageView = [[[UIImageView alloc] initWithFrame:self.fromViewController.view.bounds] autorelease];
+        self.backgroundImageView = [[UIImageView alloc] initWithFrame:self.fromViewController.view.bounds];
     }
     self.backgroundImageView.autoresizingMask = UIViewAutoresizingNone;
     self.backgroundImageView.alpha = 0.0f;
@@ -239,7 +238,7 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
     [self.view insertSubview:self.backgroundImageView atIndex:0];
     
         // Now let's fade in a gradient view over the presenting view.
-    self.gradientView = [[[DETweetGradientView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds] autorelease];
+    self.gradientView = [[DETweetGradientView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
     self.gradientView.autoresizingMask = UIViewAutoresizingNone;
     self.gradientView.transform = self.fromViewController.view.transform;
     self.gradientView.alpha = 0.0f;

@@ -22,8 +22,8 @@
 
 @interface DETweetAccountSelectorViewController : UITableViewController
 
-@property (nonatomic, assign) id<DETweetAccountSelectorViewControllerDelegate> delegate;
-@property (nonatomic, retain) ACAccount *selectedAccount;
+@property (nonatomic, unsafe_unretained) id<DETweetAccountSelectorViewControllerDelegate> delegate;
+@property (nonatomic, strong) ACAccount *selectedAccount;
 
 @end
 
