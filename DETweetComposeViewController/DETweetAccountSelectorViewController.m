@@ -93,7 +93,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    ACAccount *account = [self.accounts objectAtIndex:indexPath.row];
+    ACAccount *account = (self.accounts)[indexPath.row];
     
     cell.textLabel.text = account.accountDescription;
 
@@ -114,7 +114,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedAccount = [self.accounts objectAtIndex:indexPath.row];
+    self.selectedAccount = (self.accounts)[indexPath.row];
     
     for (UITableViewCell *cell in [self.tableView visibleCells]) {
         cell.textLabel.textColor = [UIColor darkTextColor];

@@ -57,8 +57,7 @@
 
     [self updateFramesForOrientation:self.interfaceOrientation];
     
-    self.tweets = [NSArray arrayWithObjects:
-                   @"Step into my office.",
+    self.tweets = @[@"Step into my office.",
                    @"Please take a seat. I suppose you're wondering why I called you all here…",
                    @"You eyeballin' me son?!",
                    @"I'm going to make him an offer he can't refuse.",
@@ -73,8 +72,7 @@
                    @"It's been a ruff day for all of us.",
                    @"The maple kind, yeah?",
                    @"Unless you brought enough biscuits for everyone I suggest you leave.",
-                   @"Would you file a new TPS report for 1 Scooby Snack? How about 2?",
-                   nil];
+                   @"Would you file a new TPS report for 1 Scooby Snack? How about 2?"];
 }
 
 
@@ -164,7 +162,7 @@
     [tcvc addURL:[NSURL URLWithString:@"http://www.DoubleEncore.com/"]];
     [tcvc addURL:[NSURL URLWithString:@"http://www.apple.com/ios/features.html#twitter"]];
     [tcvc addURL:[NSURL URLWithString:@"http://www.twitter.com/"]];  // This won't work either. Only three URLs allowed, just like Apple's implementation.
-    NSString *tweetText = [self.tweets objectAtIndex:arc4random() % [self.tweets count]];
+    NSString *tweetText = (self.tweets)[arc4random() % [self.tweets count]];
     [tcvc setInitialText:tweetText];
 }
 

@@ -186,17 +186,13 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
     
         // Put the attachment frames and image views into arrays so they're easier to work with.
         // Order is important, so we can't use IB object arrays. Or at least this is easier.
-    self.attachmentFrameViews = [NSArray arrayWithObjects:
-                                 self.attachment1FrameView,
+    self.attachmentFrameViews = @[self.attachment1FrameView,
                                  self.attachment2FrameView,
-                                 self.attachment3FrameView,
-                                 nil];
+                                 self.attachment3FrameView];
     
-    self.attachmentImageViews = [NSArray arrayWithObjects:
-                                 self.attachment1ImageView,
+    self.attachmentImageViews = @[self.attachment1ImageView,
                                  self.attachment2ImageView,
-                                 self.attachment3ImageView,
-                                 nil];
+                                 self.attachment3ImageView];
     
         // Now add some angle to attachments 2 and 3.
     self.attachment2FrameView.transform = CGAffineTransformMakeRotation(degreesToRadians(-6.0f));
@@ -642,17 +638,17 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
     if ([attachmentImages count] >= 1) {
         self.paperClipView.hidden = NO;
         self.attachment1FrameView.hidden = NO;
-        self.attachment1ImageView.image = [attachmentImages objectAtIndex:0];
+        self.attachment1ImageView.image = attachmentImages[0];
         
         if ([attachmentImages count] >= 2) {
             self.paperClipView.hidden = NO;
             self.attachment2FrameView.hidden = NO;
-            self.attachment2ImageView.image = [attachmentImages objectAtIndex:1];
+            self.attachment2ImageView.image = attachmentImages[1];
             
             if ([attachmentImages count] >= 3) {
                 self.paperClipView.hidden = NO;
                 self.attachment3FrameView.hidden = NO;
-                self.attachment3ImageView.image = [attachmentImages objectAtIndex:2];
+                self.attachment3ImageView.image = attachmentImages[2];
             }
         }
     }
