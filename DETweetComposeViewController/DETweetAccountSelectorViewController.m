@@ -31,25 +31,6 @@
 
 @implementation DETweetAccountSelectorViewController
 
-    // Public
-@synthesize delegate = _delegate;
-@synthesize selectedAccount = _selectedAccount;
-
-    // Private
-@synthesize accounts = _accounts;
-
-
-#pragma mark - Setup & Teardown
-
-- (void)dealloc
-{
-    _delegate = nil;
-    _selectedAccount = nil;
-    _accounts = nil;
-    
-}
-
-
 #pragma mark - Superclass Overrides
 
 - (void)viewDidLoad

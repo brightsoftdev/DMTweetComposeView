@@ -20,16 +20,10 @@
 
 
 @interface DETweetGradientView ()
-
-- (void)tweetGradientViewInit;
-
 @end
 
 
 @implementation DETweetGradientView
-
-@synthesize centerOffset = _centerOffset;
-
 
 #pragma mark - Setup & Teardown
 

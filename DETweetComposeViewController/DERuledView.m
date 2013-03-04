@@ -20,18 +20,10 @@
 
 
 @interface DERuledView ()
-
-- (void)tweetRuledViewInit;
-
 @end
 
 
 @implementation DERuledView
-
-@synthesize rowHeight = _rowHeight;
-@synthesize lineWidth = _lineWidth;
-@synthesize lineColor = _lineColor;
-
 
 #pragma mark - Setup & Teardown
 

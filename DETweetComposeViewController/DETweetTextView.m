@@ -22,31 +22,14 @@
 
 
 @interface DETweetTextView ()
-
 @property (nonatomic, strong) DERuledView *ruledView;
 @property (nonatomic, strong) UIButton *fromButton;
 @property (nonatomic, strong) UIButton *accountButton;
 @property (nonatomic, strong) UIImageView *accountLine;
-
-- (void)textViewInit;
-- (CGRect)ruledViewFrame;
-- (void)updateAccountsView;
-
 @end
 
 
 @implementation DETweetTextView
-
-    // Public
-@synthesize accountName = _accountName;
-@dynamic fromButtonFrame;
-
-    // Private
-@synthesize ruledView = _ruledView;
-@synthesize fromButton = _fromButton;
-@synthesize accountButton = _accountButton;
-@synthesize accountLine = _accountLine;
-
 
 #pragma mark - Setup & Teardown
 

@@ -21,18 +21,11 @@
 
 
 @interface DETweetSheetCardView ()
-
 @property (nonatomic, strong) UIView *backgroundView;
-
-- (void)tweetSheetCardViewInit;
-
 @end
 
 
 @implementation DETweetSheetCardView
-
-@synthesize backgroundView = _backgroundView;
-
 
 #pragma mark - Setup & Teardown
 

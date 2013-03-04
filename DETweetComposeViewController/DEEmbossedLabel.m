@@ -23,27 +23,11 @@
 
 
 @interface DEEmbossedLabel ()
-
 @property (nonatomic, strong) NSAttributedString *attString;
-
-- (void)embossedLabelInit;
-- (void)drawTextInContext:(CGContextRef)context;
-UIImage *blackSquare(CGSize size);
-CGImageRef createMask(CGSize size, void (^shapeBlock)(void));
-void drawWithInnerShadow(CGRect rect, 
-                         CGSize shadowSize, 
-                         CGFloat shadowBlur, 
-                         UIColor *shadowColor, 
-                         void (^drawJustShapeBlock)(void), 
-                         void (^drawColoredShapeBlock)(void));
-
 @end
 
 
 @implementation DEEmbossedLabel
-
-@synthesize attString = _attString;
-
 
 #pragma mark - Setup & Teardown
 
