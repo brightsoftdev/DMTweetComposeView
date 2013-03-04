@@ -17,7 +17,6 @@
 //
 
 #import "DETweetAccountSelectorViewController.h"
-#import "TwitterDialog.h"
 
 @class DETweetSheetCardView;
 @class DETweetTextView;

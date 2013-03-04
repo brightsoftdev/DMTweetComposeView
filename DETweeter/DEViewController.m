@@ -56,11 +56,6 @@
 {
     [super viewDidLoad];
 
-    if ([TWTweetComposeViewController class] == nil) {
-        self.twTweetButton.enabled = NO;
-        [self.twTweetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    }
-    
     [self updateFramesForOrientation:self.interfaceOrientation];
     
     self.tweets = [NSArray arrayWithObjects:
@@ -163,29 +158,6 @@
 }
 
 
-- (void)tweetThem
-{
-    TWTweetComposeViewControllerCompletionHandler completionHandler = ^(TWTweetComposeViewControllerResult result) {
-        switch (result) {
-            case TWTweetComposeViewControllerResultCancelled:
-                NSLog(@"Twitter Result: Cancelled");
-                break;
-            case TWTweetComposeViewControllerResultDone:
-                NSLog(@"Twitter Result: Sent");
-                break;
-        }
-        [self dismissModalViewControllerAnimated:YES];
-    };
-
-    TWTweetComposeViewController *tcvc = [[[TWTweetComposeViewController alloc] init] autorelease];
-    if (tcvc) {
-        [self addTweetContent:tcvc];
-        tcvc.completionHandler = completionHandler;
-        [self presentModalViewController:tcvc animated:YES];
-    }
-}
-
-
 - (void)addTweetContent:(id)tcvc
 {
     [tcvc addImage:[UIImage imageNamed:@"YawkeyBusinessDog.jpg"]];
@@ -206,9 +178,7 @@
 }
 
 
-- (IBAction)tweetThem:(id)sender
-{    
-    [self tweetThem];
+- (IBAction)tweetThem:(id)sender {    
 }
 
 
