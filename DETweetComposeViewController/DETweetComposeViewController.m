@@ -35,19 +35,10 @@
 
 
 @implementation DETweetComposeViewController
-enum {
-    DETweetComposeViewControllerNoAccountsAlert = 1,
-    DETweetComposeViewControllerCannotSendAlert
-};
 
-NSInteger const DETweetMaxLength = 140;
-NSInteger const DETweetURLLength = 20;  // https://dev.twitter.com/docs/tco-url-wrapper
-NSInteger const DETweetMaxImages = 1;  // We'll get this dynamically later, but not today.
-static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdentifier";
-
-#define degreesToRadians(x) (M_PI * x / 180.0f)
-
-
+- (NSNumber *) maxTextLength{
+    return _maxTextLength ?: @10;
+}
 
 - (UIImage *) captureScreen {
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
@@ -347,10 +338,10 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
 
 - (NSInteger)charactersAvailable
 {
-    NSInteger available = DETweetMaxLength;
+    NSInteger available = self.maxTextLength.integerValue;
     available -= [self.textView.text length];
     
-    if ( (available < DETweetMaxLength) && ([self.textView.text length] == 0) ) {
+    if ( (available < self.maxTextLength.integerValue) && ([self.textView.text length] == 0) ) {
         available += 1;  // The space we added for the first URL isn't needed.
     }
     
@@ -366,7 +357,7 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
     
     if (available >= 0) {
         self.characterCountLabel.textColor = [UIColor grayColor];
-        self.sendButton.enabled = (available != DETweetMaxLength);  // At least one character is required.
+        self.sendButton.enabled = (available != self.maxTextLength.integerValue);  // At least one character is required.
     }
     else {
         self.characterCountLabel.textColor = [UIColor colorWithRed:0.64f green:0.32f blue:0.32f alpha:1.0f];

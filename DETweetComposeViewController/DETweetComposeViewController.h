@@ -42,4 +42,5 @@
     // not fit within the character space currently available, or if the sheet
     // has already been presented to the user.
 - (BOOL)setInitialText:(NSString *)text;
+@property (nonatomic, copy) NSNumber *maxTextLength;
 @end
