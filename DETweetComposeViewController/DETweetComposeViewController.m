@@ -26,17 +26,11 @@
 
 @interface DETweetComposeViewController ()
 @property (nonatomic, copy) NSString *text;
-@property (nonatomic, strong) NSMutableArray *images;
-@property (nonatomic, strong) NSMutableArray *urls;
-@property (nonatomic, strong) NSArray *attachmentFrameViews;
-@property (nonatomic, strong) NSArray *attachmentImageViews;
 @property (nonatomic) UIStatusBarStyle previousStatusBarStyle;
 @property (nonatomic, unsafe_unretained) UIViewController *fromViewController;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) DETweetGradientView *gradientView;
 @property (nonatomic, strong) UIPickerView *accountPickerView;
-@property (nonatomic, strong) UIPopoverController *accountPickerPopoverController;
-@property (nonatomic, strong) id twitterAccount;  // iOS 5 use only.
 @end
 
 
@@ -108,64 +102,9 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self tweetComposeViewControllerInit];
     }
     return self;
 }
-
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self tweetComposeViewControllerInit];
-    }
-    return self;
-}
-
-
-- (void)tweetComposeViewControllerInit
-{
-    _images = [[NSMutableArray alloc] init];
-    _urls = [[NSMutableArray alloc] init];
-}
-
-
-- (void)dealloc
-{
-        // IBOutlets
-    _cardView = nil;
-    _titleLabel = nil;
-    _cancelButton = nil;
-    _sendButton = nil;
-    _cardHeaderLineView = nil;
-    _textView = nil;
-    _textViewContainer = nil;
-    _paperClipView = nil;
-    _attachment1FrameView = nil;
-    _attachment2FrameView = nil;
-    _attachment3FrameView = nil;
-    _attachment1ImageView = nil;
-    _attachment2ImageView = nil;
-    _attachment3ImageView = nil;
-    _characterCountLabel = nil;
-    
-        // Public
-    _completionHandler = nil;
-    
-        // Private
-    _text = nil;
-    _images = nil;
-    _urls = nil;
-    _attachmentFrameViews = nil;
-    _attachmentImageViews = nil;
-    _backgroundImageView = nil;
-    _gradientView = nil;
-    _accountPickerView = nil;
-    _accountPickerPopoverController = nil;
-    _twitterAccount = nil;
-}
-
 
 #pragma mark - Superclass Overrides
 
@@ -184,33 +123,10 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
         self.fromViewController = self.parentViewController;
     }
     
-        // Put the attachment frames and image views into arrays so they're easier to work with.
-        // Order is important, so we can't use IB object arrays. Or at least this is easier.
-    self.attachmentFrameViews = @[self.attachment1FrameView,
-                                 self.attachment2FrameView,
-                                 self.attachment3FrameView];
-    
-    self.attachmentImageViews = @[self.attachment1ImageView,
-                                 self.attachment2ImageView,
-                                 self.attachment3ImageView];
-    
-        // Now add some angle to attachments 2 and 3.
-    self.attachment2FrameView.transform = CGAffineTransformMakeRotation(degreesToRadians(-6.0f));
-    self.attachment2ImageView.transform = CGAffineTransformMakeRotation(degreesToRadians(-6.0f));
-    self.attachment3FrameView.transform = CGAffineTransformMakeRotation(degreesToRadians(-12.0f));
-    self.attachment3ImageView.transform = CGAffineTransformMakeRotation(degreesToRadians(-12.0f));
-    
-        // Mask the corners on the image views so they don't stick out of the frame.
-    [self.attachmentImageViews enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
-        ((UIImageView *)obj).layer.cornerRadius = 3.0f;
-        ((UIImageView *)obj).layer.masksToBounds = YES;
-    }];
-    
     self.textView.text = self.text;
     [self.textView becomeFirstResponder];
     
     [self updateCharacterCount];
-    [self updateAttachments];
 }
 
 
@@ -322,46 +238,6 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
 }
 
 
-- (void)viewDidUnload
-{
-        // Keep:
-        //  _completionHandler
-        //  _text
-        //  _images
-        //  _urls
-        //  _twitterAccount
-    
-        // Save the text.
-    self.text = self.textView.text;
-    
-        // IBOutlets
-    self.cardView = nil;
-    self.titleLabel = nil;
-    self.cancelButton = nil;
-    self.sendButton = nil;
-    self.cardHeaderLineView = nil;
-    self.textView = nil;
-    self.textViewContainer = nil;
-    self.paperClipView = nil;
-    self.attachment1FrameView = nil;
-    self.attachment2FrameView = nil;
-    self.attachment3FrameView = nil;
-    self.attachment1ImageView = nil;
-    self.attachment2ImageView = nil;
-    self.attachment3ImageView = nil;
-    self.characterCountLabel = nil;
-    
-        // Private
-    self.attachmentFrameViews = nil;
-    self.attachmentImageViews = nil;
-    self.gradientView = nil;
-    self.accountPickerView = nil;
-    self.accountPickerPopoverController = nil;
-    
-    [super viewDidUnload];
-}
-
-
 #pragma mark - Public
 
 - (BOOL)setInitialText:(NSString *)initialText
@@ -380,86 +256,6 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
     return YES;
 }
 
-
-- (BOOL)addImage:(UIImage *)image
-{
-    if (image == nil) {
-        return NO;
-    }
-    
-    if ([self isPresented]) {
-        return NO;
-    }
-    
-    if ([self.images count] >= DETweetMaxImages) {
-        return NO;
-    }
-    
-    if ([self attachmentsCount] >= 3) {
-        return NO;  // Only three allowed.
-    }
-    
-    if (([self charactersAvailable] - (DETweetURLLength + 1)) < 0) {  // Add one for the space character.
-        return NO;
-    }
-    
-    [self.images addObject:image];
-    return YES;
-}
-
-
-- (BOOL)addImageWithURL:(NSURL *)url;
-    // Not yet impelemented.
-{
-        // We should probably just start the download, rather than saving the URL.
-        // Just save the image once we have it.
-    return NO;
-}
-
-
-- (BOOL)removeAllImages
-{
-    if ([self isPresented]) {
-        return NO;
-    }
-    
-    [self.images removeAllObjects];
-    return YES;
-}
-
-
-- (BOOL)addURL:(NSURL *)url
-{
-    if (url == nil) {
-        return NO;
-    }
-    
-    if ([self isPresented]) {
-        return NO;
-    }
-    
-    if ([self attachmentsCount] >= 3) {
-        return NO;  // Only three allowed.
-    }
-    
-    if (([self charactersAvailable] - (DETweetURLLength + 1)) < 0) {  // Add one for the space character.
-        return NO;
-    }
-    
-    [self.urls addObject:url];
-    return YES;
-}
-
-
-- (BOOL)removeAllURLs
-{
-    if ([self isPresented]) {
-        return NO;
-    }
-    
-    [self.urls removeAllObjects];
-    return YES;
-}
 
 
 #pragma mark - Private
@@ -527,42 +323,16 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
     self.cardHeaderLineView.frame = CGRectMake(0.0f, cardHeaderLineTop, self.cardView.bounds.size.width, self.cardHeaderLineView.frame.size.height);
     
     CGFloat textWidth = CGRectGetWidth(self.cardView.bounds);
-    if ([self attachmentsCount] > 0) {
-        textWidth -= CGRectGetWidth(self.attachment1FrameView.frame) + 10.0f;  // Got to measure frame 1, because it's not rotated. Other frames are funky.
-    }
+    
     CGFloat textTop = CGRectGetMaxY(self.cardHeaderLineView.frame) - 1.0f;
     CGFloat textHeight = self.cardView.bounds.size.height - textTop - 30.0f;
     self.textViewContainer.frame = CGRectMake(0.0f, textTop, self.cardView.bounds.size.width, textHeight);
     self.textView.frame = CGRectMake(0.0f, 0.0f, textWidth, self.textViewContainer.frame.size.height);
     self.textView.scrollIndicatorInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, -(self.cardView.bounds.size.width - textWidth - 1.0f));
     
-    self.paperClipView.frame = CGRectMake(CGRectGetMaxX(self.cardView.frame) - self.paperClipView.frame.size.width + 6.0f,
-                                          CGRectGetMinY(self.cardView.frame) + CGRectGetMaxY(self.cardHeaderLineView.frame) - 1.0f,
-                                          self.paperClipView.frame.size.width,
-                                          self.paperClipView.frame.size.height);
-    
-        // We need to position the rotated views by their center, not their frame.
-        // This isn't elegant, but it is correct. Half-points are required because
-        // some frame sizes aren't evenly divisible by 2.
-    self.attachment1FrameView.center = CGPointMake(self.cardView.bounds.size.width - 45.0f, CGRectGetMaxY(self.paperClipView.frame) - cardTop + 18.0f);
-    self.attachment1ImageView.center = CGPointMake(self.cardView.bounds.size.width - 45.5, self.attachment1FrameView.center.y - 2.0f);
-    
-    self.attachment2FrameView.center = CGPointMake(self.attachment1FrameView.center.x - 4.0f, self.attachment1FrameView.center.y + 5.0f);
-    self.attachment2ImageView.center = CGPointMake(self.attachment1ImageView.center.x - 4.0f, self.attachment1ImageView.center.y + 5.0f);
-    
-    self.attachment3FrameView.center = CGPointMake(self.attachment2FrameView.center.x - 4.0f, self.attachment2FrameView.center.y + 5.0f);
-    self.attachment3ImageView.center = CGPointMake(self.attachment2ImageView.center.x - 4.0f, self.attachment2ImageView.center.y + 5.0f);
-    
     characterCountLeft = CGRectGetWidth(self.cardView.frame) - CGRectGetWidth(self.characterCountLabel.frame) - 12.0f;
     characterCountTop = CGRectGetHeight(self.cardView.frame) - CGRectGetHeight(self.characterCountLabel.frame) - 8.0f;
-    if ([UIDevice de_isPhone]) {
-        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-            characterCountTop -= 5.0f;
-            if ([self attachmentsCount] > 0) {
-                characterCountLeft -= CGRectGetWidth(self.attachment3FrameView.frame) - 15.0f;
-            }
-        }
-    }
+
     self.characterCountLabel.frame = CGRectMake(characterCountLeft, characterCountTop, self.characterCountLabel.frame.size.width, self.characterCountLabel.frame.size.height);
     
     self.gradientView.frame = self.gradientView.superview.bounds;
@@ -578,8 +348,6 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
 - (NSInteger)charactersAvailable
 {
     NSInteger available = DETweetMaxLength;
-    available -= (DETweetURLLength + 1) * [self.images count];
-    available -= (DETweetURLLength + 1) * [self.urls count];
     available -= [self.textView.text length];
     
     if ( (available < DETweetMaxLength) && ([self.textView.text length] == 0) ) {
@@ -606,55 +374,6 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
     }
 }
 
-
-- (NSInteger)attachmentsCount
-{
-    return [self.images count] + [self.urls count];
-}
-
-
-- (void)updateAttachments
-{
-    CGRect frame = self.textView.frame;
-    if ([self attachmentsCount] > 0) {
-        frame.size.width = self.cardView.frame.size.width - self.attachment1FrameView.frame.size.width;
-    }
-    else {
-        frame.size.width = self.cardView.frame.size.width;
-    }
-    self.textView.frame = frame;
-    
-        // Create a array of attachment images to display.
-    NSMutableArray *attachmentImages = [NSMutableArray arrayWithArray:self.images];
-    for (NSInteger index = 0; index < [self.urls count]; index++) {
-        [attachmentImages addObject:[UIImage imageNamed:@"DETweetURLAttachment"]];
-    }
-    
-    self.paperClipView.hidden = YES;
-    self.attachment1FrameView.hidden = YES;
-    self.attachment2FrameView.hidden = YES;
-    self.attachment3FrameView.hidden = YES;
-    
-    if ([attachmentImages count] >= 1) {
-        self.paperClipView.hidden = NO;
-        self.attachment1FrameView.hidden = NO;
-        self.attachment1ImageView.image = attachmentImages[0];
-        
-        if ([attachmentImages count] >= 2) {
-            self.paperClipView.hidden = NO;
-            self.attachment2FrameView.hidden = NO;
-            self.attachment2ImageView.image = attachmentImages[1];
-            
-            if ([attachmentImages count] >= 3) {
-                self.paperClipView.hidden = NO;
-                self.attachment3FrameView.hidden = NO;
-                self.attachment3ImageView.image = attachmentImages[2];
-            }
-        }
-    }
-}
-
-
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -663,15 +382,6 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
 }
 
 
-#pragma mark - DETweetAccountSelectorViewControllerDelegate
-
-- (void)tweetAccountSelectorViewController:(DETweetAccountSelectorViewController *)viewController didSelectAccount:(ACAccount *)account
-{
-    self.twitterAccount = account;
-    self.textView.accountName = ((ACAccount *)self.twitterAccount).accountDescription;
-    [self.accountPickerPopoverController dismissPopoverAnimated:YES];
-}
-
 
 #pragma mark - Actions
 
@@ -679,54 +389,13 @@ static NSString * const DETweetLastAccountIdentifier = @"DETweetLastAccountIdent
 {
     self.sendButton.enabled = NO;
     
-    NSString *tweet = self.textView.text;
-    
-    for (NSURL *url in self.urls) {
-        NSString *urlString = [url absoluteString];
-        if ([tweet length] > 0) {
-            tweet = [tweet stringByAppendingString:@" "];
-        }
-        tweet = [tweet stringByAppendingString:urlString];
-    }
-    
-//    tweetPoster.delegate = self;
-
-//    [tweetPoster postTweet:tweet withImages:self.images fromAccount:self.twitterAccount];
+//    NSString *tweet = self.textView.text;
 }
 
 
 - (IBAction)cancel
 {
-    if (self.completionHandler) {
-        self.completionHandler(DETweetComposeViewControllerResultCancelled);
-    }
-    else {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-}
-
-
-#pragma mark - UIAlertViewDelegate
-
-+ (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-    // Notice this is a class method since we're displaying the alert from a class method.
-{
-    // no op
-}
-
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-    // This gets called if there's an error sending the tweet.
-{
-    if (alertView.tag == DETweetComposeViewControllerNoAccountsAlert) {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-    else if (alertView.tag == DETweetComposeViewControllerCannotSendAlert) {
-        if (buttonIndex == 1) {
-                // The user wants to try again.
-            [self send];
-        }
-    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

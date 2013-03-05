@@ -16,16 +16,12 @@
 //  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "DETweetAccountSelectorViewController.h"
 
 @class DETweetSheetCardView;
 @class DETweetTextView;
 
 @interface DETweetComposeViewController : UIViewController <
-    UITextViewDelegate,
-    UIAlertViewDelegate,
-    UIPopoverControllerDelegate,
-    DETweetAccountSelectorViewControllerDelegate
+    UITextViewDelegate
 >
 
 @property (strong, nonatomic) IBOutlet DETweetSheetCardView *cardView;
@@ -35,63 +31,15 @@
 @property (strong, nonatomic) IBOutlet UIView *cardHeaderLineView;
 @property (strong, nonatomic) IBOutlet DETweetTextView *textView;
 @property (strong, nonatomic) IBOutlet UIView *textViewContainer;
-@property (strong, nonatomic) IBOutlet UIImageView *paperClipView;
-@property (strong, nonatomic) IBOutlet UIImageView *attachment1FrameView;
-@property (strong, nonatomic) IBOutlet UIImageView *attachment2FrameView;
-@property (strong, nonatomic) IBOutlet UIImageView *attachment3FrameView;
-@property (strong, nonatomic) IBOutlet UIImageView *attachment1ImageView;
-@property (strong, nonatomic) IBOutlet UIImageView *attachment2ImageView;
-@property (strong, nonatomic) IBOutlet UIImageView *attachment3ImageView;
 @property (strong, nonatomic) IBOutlet UILabel *characterCountLabel;
 
     // Public
 - (IBAction)send;
 - (IBAction)cancel;
 
-enum DETweetComposeViewControllerResult {
-    DETweetComposeViewControllerResultCancelled,
-    DETweetComposeViewControllerResultDone
-};
-typedef enum DETweetComposeViewControllerResult DETweetComposeViewControllerResult;
-
-    // Completion handler for DETweetComposeViewController
-typedef void (^DETweetComposeViewControllerCompletionHandler)(DETweetComposeViewControllerResult result); 
 
     // Sets the initial text to be tweeted. Returns NO if the specified text will
     // not fit within the character space currently available, or if the sheet
     // has already been presented to the user.
 - (BOOL)setInitialText:(NSString *)text;
-
-    // Adds an image to the tweet. Returns NO if the additional image will not fit
-    // within the character space currently available, or if the sheet has already
-    // been presented to the user.
-- (BOOL)addImage:(UIImage *)image;
-
-    // Adds a URL to the tweet. Returns NO if the additional URL will not fit
-    // within the character space currently available, or if the sheet has already
-    // been presented to the user.
-- (BOOL)addImageWithURL:(NSURL *)url;
-
-    // Removes all images from the tweet. Returns NO and does not perform an operation
-    // if the sheet has already been presented to the user. 
-- (BOOL)removeAllImages;
-
-    // Adds a URL to the tweet. Returns NO if the additional URL will not fit
-    // within the character space currently available, or if the sheet has already
-    // been presented to the user.
-- (BOOL)addURL:(NSURL *)url;
-
-    // Removes all URLs from the tweet. Returns NO and does not perform an operation
-    // if the sheet has already been presented to the user.
-- (BOOL)removeAllURLs;
-
-    // Specify a block to be called when the user is finished. This block is not guaranteed
-    // to be called on any particular thread.
-@property (nonatomic, copy) DETweetComposeViewControllerCompletionHandler completionHandler;
-
-    // On iOS5+, set to YES to prevent from using built in Twitter credentials.
-    // Set to NO by default.
-@property (assign, nonatomic) BOOL alwaysUseDETwitterCredentials;
-
-
 @end

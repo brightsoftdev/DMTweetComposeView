@@ -26,29 +26,9 @@
     return (NSClassFromString(@"NSJSONSerialization") != nil);
 }
 
-
-+ (BOOL)de_isPad
-{
-    return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad ? YES : NO;
-}
-
-
 + (BOOL)de_isPhone
 {
     return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone ? YES : NO;
 }
-
-
-+ (BOOL)de_isRetinaDisplay
-{
-    UIScreen* screen = [UIScreen mainScreen];
-    if ([screen respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
-        [screen respondsToSelector:@selector(scale)]) {
-        return screen.scale == 2.0f;
-    }
-    
-    return NO;
-}
-
 
 @end

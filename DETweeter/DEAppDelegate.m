@@ -11,23 +11,6 @@
 
 @implementation DEAppDelegate
 
-@synthesize window = _window;
-@synthesize viewController = _viewController;
-
-
-
-#pragma mark - Class Methods
-
-
-#pragma mark - Setup & Teardown
-
-- (void)dealloc
-{
-    _window = nil;
-    _viewController = nil;
-    
-}
-
 
 #pragma mark - UIApplicationDelegate
 

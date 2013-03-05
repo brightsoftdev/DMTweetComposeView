@@ -12,42 +12,11 @@
 
 
 @interface DEViewController ()
-
 @property (nonatomic, strong) NSArray *tweets;
-
-- (void)updateFramesForOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (void)addTweetContent:(id)tcvc;
-
 @end
 
 
 @implementation DEViewController
-
-    // IBOutlets
-@synthesize deTweetButton = _deTweetButton;
-@synthesize twTweetButton = _twTweetButton;
-@synthesize backgroundView = _backgroundView;
-@synthesize buttonView = _buttonView;
-@synthesize tweets = _tweets;
-
-    // Private
-
-
-#pragma mark - Setup & Teardown
-
-- (void)dealloc
-{
-        // IBOutlets
-    _deTweetButton = nil;
-    _twTweetButton = nil;
-    _backgroundView = nil;
-    _buttonView = nil;
-    
-        // Private
-    _tweets = nil;
-
-}
-
 
 #pragma mark - Superclass Overrides
 
@@ -73,6 +42,8 @@
                    @"The maple kind, yeah?",
                    @"Unless you brought enough biscuits for everyone I suggest you leave.",
                    @"Would you file a new TPS report for 1 Scooby Snack? How about 2?"];
+    
+    [self tweetUs];
 }
 
 
@@ -92,20 +63,6 @@
     [self updateFramesForOrientation:interfaceOrientation];
 }
 
-
-- (void)viewDidUnload
-{
-        // IBOutlets
-    self.deTweetButton = nil;
-    self.twTweetButton = nil;
-    self.backgroundView = nil;
-    self.buttonView = nil;
-    
-        // Private
-    self.tweets = nil;
-    
-    [super viewDidUnload];
-}
 
 
 #pragma mark - Private
@@ -131,37 +88,16 @@
 
 - (void)tweetUs
 {    
-    DETweetComposeViewControllerCompletionHandler completionHandler = ^(DETweetComposeViewControllerResult result) {
-        switch (result) {
-            case DETweetComposeViewControllerResultCancelled:
-                NSLog(@"Twitter Result: Cancelled");
-                break;
-            case DETweetComposeViewControllerResultDone:
-                NSLog(@"Twitter Result: Sent");
-                break;
-        }
-        [self dismissModalViewControllerAnimated:YES];
-    };
-
     DETweetComposeViewController *tcvc = [[DETweetComposeViewController alloc] init];
     self.modalPresentationStyle = UIModalPresentationCurrentContext;
     [self addTweetContent:tcvc];
-    tcvc.completionHandler = completionHandler;
     
-    // Optionally, set alwaysUseDETwitterCredentials to YES to prevent using
-    //  iOS5 Twitter credentials.
-//    tcvc.alwaysUseDETwitterCredentials = YES;
     [self presentModalViewController:tcvc animated:YES];
 }
 
 
-- (void)addTweetContent:(id)tcvc
+- (void)addTweetContent:(DETweetComposeViewController *)tcvc
 {
-    [tcvc addImage:[UIImage imageNamed:@"YawkeyBusinessDog.jpg"]];
-    [tcvc addImage:[UIImage imageNamed:@"YawkeyCleanTeeth.jpg"]];  // This one won't actually work. Only one image per tweet allowed currently by Twitter.
-    [tcvc addURL:[NSURL URLWithString:@"http://www.DoubleEncore.com/"]];
-    [tcvc addURL:[NSURL URLWithString:@"http://www.apple.com/ios/features.html#twitter"]];
-    [tcvc addURL:[NSURL URLWithString:@"http://www.twitter.com/"]];  // This won't work either. Only three URLs allowed, just like Apple's implementation.
     NSString *tweetText = (self.tweets)[arc4random() % [self.tweets count]];
     [tcvc setInitialText:tweetText];
 }
