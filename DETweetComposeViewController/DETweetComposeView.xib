@@ -353,24 +353,6 @@
 					<int key="connectionID">58</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">cancel</string>
-						<reference key="source" ref="721475442"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">9</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">send</string>
-						<reference key="source" ref="944682106"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">8</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="460695988"/>
@@ -518,7 +500,6 @@
 						<string key="cardHeaderLineView">UIView</string>
 						<string key="cardView">DETweetSheetCardView</string>
 						<string key="characterCountLabel">UILabel</string>
-						<string key="paperClipView">UIImageView</string>
 						<string key="sendButton">UIButton</string>
 						<string key="textView">DETweetTextView</string>
 						<string key="textViewContainer">UIView</string>
@@ -540,10 +521,6 @@
 						<object class="IBToOneOutletInfo" key="characterCountLabel">
 							<string key="name">characterCountLabel</string>
 							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="paperClipView">
-							<string key="name">paperClipView</string>
-							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="sendButton">
 							<string key="name">sendButton</string>

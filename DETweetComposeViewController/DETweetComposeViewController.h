@@ -20,10 +20,7 @@
 @class DETweetSheetCardView;
 @class DETweetTextView;
 
-@interface DETweetComposeViewController : UIViewController <
-    UITextViewDelegate
->
-
+@interface DETweetComposeViewController : UIViewController
 @property (strong, nonatomic) IBOutlet DETweetSheetCardView *cardView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
@@ -33,14 +30,12 @@
 @property (strong, nonatomic) IBOutlet UIView *textViewContainer;
 @property (strong, nonatomic) IBOutlet UILabel *characterCountLabel;
 
-    // Public
-- (IBAction)send;
-- (IBAction)cancel;
-
-
     // Sets the initial text to be tweeted. Returns NO if the specified text will
     // not fit within the character space currently available, or if the sheet
     // has already been presented to the user.
 - (BOOL)setInitialText:(NSString *)text;
 @property (nonatomic, copy) NSNumber *maxTextLength;
+
+
+
 @end

@@ -24,7 +24,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface DETweetComposeViewController ()
+@interface DETweetComposeViewController ()<
+    UITextViewDelegate
+>
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic) UIStatusBarStyle previousStatusBarStyle;
 @property (nonatomic, unsafe_unretained) UIViewController *fromViewController;
@@ -116,6 +118,9 @@
     
     self.textView.text = self.text;
     [self.textView becomeFirstResponder];
+    
+    [self.cancelButton addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+    [self.sendButton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
     
     [self updateCharacterCount];
 }
