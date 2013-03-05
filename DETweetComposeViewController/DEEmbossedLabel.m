@@ -87,10 +87,15 @@
 
 - (void)drawTextInContext:(CGContextRef)context
 {
-    CGContextSelectFont(context, [self.font.fontName cStringUsingEncoding:[NSString defaultCStringEncoding]], self.font.pointSize, kCGEncodingMacRoman);
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 0.0f, self.bounds.size.height);
+    CGContextScaleCTM(context, 1.0f, -1.0f);
+    
     CGRect textRect = [self textRectForBounds:self.bounds limitedToNumberOfLines:1];
-    CGContextSetTextPosition(context, textRect.origin.x, textRect.origin.y + 5.0f);
-    CGContextShowText(context, [self.text cStringUsingEncoding:[NSString defaultCStringEncoding]], strlen([self.text cStringUsingEncoding:[NSString defaultCStringEncoding]]));
+    [self.text drawInRect:textRect withFont:self.font];
+    
+    CGContextRestoreGState(context);
+
 }
 
 

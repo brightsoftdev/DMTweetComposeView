@@ -20,6 +20,9 @@
 @class DETweetSheetCardView;
 @class DETweetTextView;
 
+typedef void(^DETweetComposerDidSendBlock)(NSString *text);
+typedef void(^DETweetComposerDidCancelBlock)(void);
+
 @interface DETweetComposeViewController : UIViewController
 @property (strong, nonatomic) IBOutlet DETweetSheetCardView *cardView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
@@ -36,6 +39,10 @@
 - (BOOL)setInitialText:(NSString *)text;
 @property (nonatomic, copy) NSNumber *maxTextLength;
 
+@property (nonatomic, copy) NSString *cancelText;
+@property (nonatomic, copy) NSString *sendText;
+@property (nonatomic, copy) NSString *title;
 
-
+@property (nonatomic, copy) DETweetComposerDidSendBlock didSendBlock;
+@property (nonatomic, copy) DETweetComposerDidCancelBlock didCancelBlock;
 @end

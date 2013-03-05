@@ -38,6 +38,7 @@
 
 @implementation DETweetComposeViewController
 
+
 - (NSNumber *) maxTextLength{
     return _maxTextLength ?: @10;
 }
@@ -121,6 +122,15 @@
     
     [self.cancelButton addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     [self.sendButton addTarget:self action:@selector(send) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (self.cancelText) {
+        [self.cancelButton setTitle:self.cancelText forState:UIControlStateNormal];
+    }
+    
+    if (self.sendText) {
+        [self.sendButton setTitle:self.sendText forState:UIControlStateNormal];
+    }
+    self.titleLabel.text = self.title ?: @"";
     
     [self updateCharacterCount];
 }
@@ -381,17 +391,21 @@
 
 #pragma mark - Actions
 
-- (IBAction)send
-{
+- (IBAction)send {
     self.sendButton.enabled = NO;
     
-//    NSString *tweet = self.textView.text;
+    if (self.didSendBlock) {
+        self.didSendBlock(self.textView.text);
+    }
 }
 
 
-- (IBAction)cancel
-{
-    [self dismissModalViewControllerAnimated:YES];
+- (IBAction)cancel {
+    if (self.didCancelBlock) {
+        self.didCancelBlock();
+    }else{
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 @end

@@ -89,8 +89,15 @@
 - (void)tweetUs
 {    
     DETweetComposeViewController *tcvc = [[DETweetComposeViewController alloc] init];
+    tcvc.didSendBlock = ^(NSString * text){
+        NSLog(@"%@", text);
+    };
+    tcvc.sendText = NSLocalizedString(@"确定", nil);
+    tcvc.cancelText = NSLocalizedString(@"取消", nil);
+    tcvc.title = NSLocalizedString(@"标题", nil);
     self.modalPresentationStyle = UIModalPresentationCurrentContext;
     [self addTweetContent:tcvc];
+    
     
     [self presentModalViewController:tcvc animated:YES];
 }
